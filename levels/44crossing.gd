@@ -1,3 +1,4 @@
+class_name Level_44crossing
 extends Level
 ## 关卡 (4,4)：限制放置 6 个车（车）。放满 6 个后触发判定；判定处为示例占位，直接
 ## 写 pass（无胜负逻辑）。

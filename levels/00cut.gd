@@ -1,3 +1,4 @@
+class_name Level_00cut
 extends Level
 ## 关卡 (0,0)
 const TOTAL := 18

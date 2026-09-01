@@ -1,3 +1,4 @@
+class_name Level_54
 extends Level
 ## 关卡 (5,4)
 

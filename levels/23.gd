@@ -1,3 +1,4 @@
+class_name Level_23
 extends Level
 ## 关卡 (2,3)
 

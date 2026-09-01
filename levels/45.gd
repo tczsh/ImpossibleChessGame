@@ -1,3 +1,4 @@
+class_name Level_45
 extends Level
 ## 关卡 (4,5)
 

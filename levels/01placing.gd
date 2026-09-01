@@ -1,3 +1,4 @@
+class_name Level_01placing
 extends Level
 ## 关卡 (0,1)
 ##

@@ -1,3 +1,4 @@
+class_name Level_12
 extends Level
 ## 关卡 (1,2)
 

@@ -1,3 +1,4 @@
+class_name Level_55sorting
 extends Level
 ## 关卡 (6,6)：欧拉 36 军官问题。
 ##

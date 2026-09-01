@@ -1,3 +1,4 @@
+class_name Level_35
 extends Level
 ## 关卡 (3,5)
 

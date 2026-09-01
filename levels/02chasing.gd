@@ -1,5 +1,6 @@
+class_name Level_02chasing
 extends Level
-## 关卡 (0,0)
+## 关卡 (0,2)
 
 
 func _init() -> void:

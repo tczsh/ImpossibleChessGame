@@ -6,10 +6,12 @@ extends Node3D
 ## shows its level name; hovering an unlocked square highlights it; clicking an
 ## unlocked square starts the level.
 ##
-## This node also owns the level system: it loads the 36 levels from
-## res://levels/ and launches each level's referee thread on demand. Level files
-## are named "<row><col><name>.gd" (the two leading digits are the square's row
-## and column); each derives from Level. Starting a level spins up a Thread
+## This node also owns the level system: each level is a `class_name` script
+## deriving from Level that registers itself in Godot's global class table, and
+## this node discovers them via ProjectSettings.get_global_class_list() (not a
+## filesystem scan, which fails in single-file exports). Level files are still
+## named "<row><col><name>.gd" (the two leading digits are the square's row and
+## column). Starting a level spins up a Thread
 ## running that level's `referee()` — an infinite loop that runs until
 ## stop_level() asks it to stop. While a level runs, its name is shown in the
 ## UI's "levelname" Label.
@@ -22,7 +24,6 @@ const SQUARE := 0.14
 ## Lift of the select squares above the board surface so they render on top of
 ## the board (and any pieces) instead of z-fighting with them.
 const Y_OFFSET := 0.001
-const LEVEL_DIR := "res://levels"
 
 ## Hover highlight tint — the only time a square is tinted (no dark overlay).
 const HOVER_COLOR := Color(0.95, 0.62, 0.16, 0.85)
@@ -44,7 +45,7 @@ const LEVEL_UNLOCKED := [
 ]
 
 var _board: ChessBoard = null
-## Vector2i(row, col) -> Level, filled by _load_levels() scanning LEVEL_DIR.
+## Vector2i(row, col) -> Level, filled by _load_levels() from the global class table.
 var _levels: Dictionary = {}
 var _active_thread: Thread = null
 var _current: Vector2i = Vector2i(-1, -1)
@@ -65,23 +66,24 @@ func _notification(what: int) -> void:
 # --- Level loading ---------------------------------------------------------
 
 func _load_levels() -> void:
-	var dir := DirAccess.open(LEVEL_DIR)
 	Level.board = _board
-	if dir == null:
-		push_error("[BoardSelector] 无法打开关卡目录: %s" % LEVEL_DIR)
-		return
-	for file in dir.get_files():
-		if not file.ends_with(".gd") or file == "level.gd" or file.begins_with("_"):
+	# 每个关卡脚本都在自己的 .gd 里声明了 `class_name Level_XX`，等于在 Godot 的全局
+	# 类表中"注册自己"。这里直接读取全局类表里所有 `extends Level` 的类，而不是用
+	# DirAccess 扫描 res://levels —— 单文件导出（内嵌 PCK）下 DirAccess 无法枚举
+	# res:// 目录，而全局类表会随导出一起打包，因此这样在编辑器与导出包中都能工作。
+	for info in ProjectSettings.get_global_class_list():
+		if info["base"] != "Level":
 			continue
-		var base := file.get_basename()
+		var path: String = info["path"]
+		var script := load(path) as GDScript
+		if script == null:
+			continue
+		var base: String = path.get_file().get_basename()
 		if base.length() < 2 or not base[0].is_valid_int() or not base[1].is_valid_int():
 			continue
 		var row := base[0].to_int()
 		var col := base[1].to_int()
 		if row < 0 or row >= SIZE or col < 0 or col >= SIZE:
-			continue
-		var script := load(LEVEL_DIR + "/" + file) as GDScript
-		if script == null:
 			continue
 		var level := script.new() as Level
 		if level == null:

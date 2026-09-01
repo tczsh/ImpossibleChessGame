@@ -1,3 +1,4 @@
+class_name Level_21
 extends Level
 ## 关卡 (2,1)
 
