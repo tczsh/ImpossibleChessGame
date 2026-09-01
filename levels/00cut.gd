@@ -25,6 +25,7 @@ func referee() -> void:
 					KEY_Y:
 						_place_at(m.mouse_cell)
 						if domino_counts["骨牌"]==0:
+							board.call_main_thread("clear_mesh")
 							var tt:=0.3
 							for i in range(0,5):
 								var tb:=true
