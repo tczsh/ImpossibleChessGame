@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dhc43rjd4q7ux"]
+
+[ext_resource type="Script" uid="uid://w68siec0kf42" path="res://scripts/chess_piece.gd" id="1_33xsb"]
+[ext_resource type="PackedScene" uid="uid://bmhx0msqqnq5k" path="res://assets/king/scene.gltf" id="1_r1ws2"]
+
+[node name="chess" type="Node3D" unique_id=1248552403]
+script = ExtResource("1_33xsb")
+
+[node name="Sketchfab_Scene" parent="." unique_id=1102265973 instance=ExtResource("1_r1ws2")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0, 0, 0)

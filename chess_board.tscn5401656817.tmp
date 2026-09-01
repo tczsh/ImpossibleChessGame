@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://cauplmr5trpvc"]
+
+[ext_resource type="ArrayMesh" uid="uid://cvbaxv7y8500m" path="res://assets/board/board.tres" id="2_p4xb6"]
+[ext_resource type="Script" uid="uid://cpuhhonykg5u1" path="res://scripts/camera_drag.gd" id="3_cam"]
+[ext_resource type="Script" uid="uid://vsuaem8aga5n" path="res://scripts/chess_board.gd" id="4_board"]
+[ext_resource type="Texture2D" uid="uid://xt0175qifk20" path="res://assets/UI.png" id="5_ui"]
+[ext_resource type="Script" uid="uid://yqqivu7js7b4" path="res://scripts/ui.gd" id="6_ui"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p4xb6"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_01178"]
+sky_material = SubResource("ProceduralSkyMaterial_p4xb6")
+
+[sub_resource type="Environment" id="Environment_24de6"]
+background_mode = 2
+sky = SubResource("Sky_01178")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exit"]
+atlas = ExtResource("5_ui")
+region = Rect2(32, 1304, 368, 344)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_replay"]
+atlas = ExtResource("5_ui")
+region = Rect2(944, 480, 368, 344)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_test"]
+atlas = ExtResource("5_ui")
+region = Rect2(480, 1304, 368, 344)
+
+[node name="chess_board" type="Node3D" unique_id=1867204123]
+script = ExtResource("4_board")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1373779261]
+environment = SubResource("Environment_24de6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1358950477]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0.089499414, 0.95197904, -0.6996714)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=984898690]
+transform = Transform3D(0.9902493, -0.059565578, 0.12592979, -0.0426275, 0.73104894, 0.68099225, -0.13262454, -0.6797201, 0.72138155, -0.062957406, 0.72708917, 0.8918624)
+script = ExtResource("3_cam")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=635832819]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+mesh = ExtResource("2_p4xb6")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1829278895]
+script = ExtResource("6_ui")
+
+[node name="ExitButton" type="TextureButton" parent="UI" unique_id=1454570720]
+offset_right = 64.0
+offset_bottom = 64.0
+texture_normal = SubResource("AtlasTexture_exit")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ReplayButton" type="TextureButton" parent="UI" unique_id=195461356]
+offset_left = 1088.0
+offset_right = 1151.0
+offset_bottom = 64.0
+texture_normal = SubResource("AtlasTexture_replay")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TestButton" type="TextureButton" parent="UI" unique_id=2060435672]
+offset_left = 64.0
+offset_right = 128.0
+offset_bottom = 64.0
+texture_normal = SubResource("AtlasTexture_test")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="CommandInput" type="LineEdit" parent="UI" unique_id=98119145]
+visible = false
+anchors_preset = -1
+anchor_left = 0.48600003
+anchor_top = 1.0
+anchor_right = 0.48600003
+anchor_bottom = 1.0
+offset_left = -255.87201
+offset_top = -40.0
+offset_right = 256.128
+placeholder_text = "指令: add/remove/move（help 查看帮助）"
+
+[node name="levelname" type="Label" parent="UI" unique_id=485201442]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_right = 128.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 45
+text = "***"
+horizontal_alignment = 1
+vertical_alignment = 1
