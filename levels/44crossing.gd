@@ -1,4 +1,4 @@
-class_name Level_44crossing
+class_name Level_44
 extends Level
 ## 关卡 (4,4)：限制放置 6 个车（车）。放满 6 个后触发判定；判定处为示例占位，直接
 ## 写 pass（无胜负逻辑）。
@@ -6,7 +6,7 @@ extends Level
 
 func _init() -> void:
 	level_name = "错位"
-	description = "放置 6 个皇后：使得找不出三个皇后：它们要么互相能吃，要么互相不能吃\
+	description = "放置 6 个皇后：使得找不出三个皇后：它们要么互相能吃，要么互相不能吃(吃子会被阻挡)\
 	\nY 在鼠标所指格子放置棋子，U 删除棋子。"
 	_palette = [ChessPiece.PieceColor.BLACK]
 

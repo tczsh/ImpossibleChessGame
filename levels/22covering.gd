@@ -1,4 +1,4 @@
-class_name Level_22covering
+class_name Level_22
 extends Level
 ## 关卡 (2,2)
 

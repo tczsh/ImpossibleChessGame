@@ -627,6 +627,15 @@ func set_domino_counts(counts: Dictionary) -> void:
 		ui.set_domino_counts(counts)
 
 
+## Show a one-line result/notice in the description panel. Called from a level's
+## referee thread via call_main_thread(), so it always runs on the main thread.
+func show_result(text: String) -> void:
+	if GameUI.description_panel == null or GameUI.description_label == null:
+		return
+	GameUI.description_label.text = text
+	GameUI.description_panel.visible = true
+
+
 ## The single-character label for a cell's occupant: '.' when empty, else the
 ## piece type's initial ('D' for a Domino, 'P' for a pawn blocker, and so on).
 static func _piece_char(cell: Cell) -> String:
@@ -665,7 +674,7 @@ func dump_occupancy() -> void:
 				row += " . "
 			else:
 				row += "%s%s " % [_piece_char(cell), ("*" if cell.is_primary else " ")]
-		print("[Board] " + row)
+		print("[Board%d] "%r + row)
 	print("-------------------------------------------------------------")
 
 

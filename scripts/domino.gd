@@ -60,7 +60,7 @@ func _init(
 	# GDScript does not call the parent _init() automatically once we override
 	# it, so run the base piece setup explicitly: this sets type (NONE) + color
 	# and installs the pick/drag collision shape and input wiring.
-	super._init(ChessPiece.PieceType.NONE, piece_color)
+	super._init(ChessPiece.PieceType.DOMINO, piece_color)
 	shape = shape_string
 	_build_model()
 	_refresh_pick_shape()

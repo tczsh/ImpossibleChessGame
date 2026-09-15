@@ -42,6 +42,25 @@ const KNIGHT := [
 static func odd(t:Vector2i)->bool:
 	return (t.x+t.y)%2
 
+
+# --- 尼姆决策 (NIM decision) -------------------------------------------------
+
+## 尼姆博弈的最优一步：给定若干石子堆 `piles`（每堆为一个整数），返回 [操作堆下标,
+## 取子数]。即把该堆从 piles[j] 减到 piles[j]^xor，使所有堆异或和归 0（制胜一步）。
+## 若异或和已为 0（当前是先手必败局面，无制胜一步）则返回 [-1, -1]。
+static func nim_move(piles: Array) -> Array:
+	var s: int = 0
+	for p in piles:
+		s = s ^ int(p)
+	if s == 0:
+		return [-1, -1]
+	for j in piles.size():
+		var target: int = int(piles[j]) ^ s
+		if target < int(piles[j]):
+			return [j, int(piles[j]) - target]
+	return [-1, -1]
+
+
 # --- 判断 (validation) ------------------------------------------------------
 
 ## 判定从 `cell` 走到 `to` 这一步是否合法：位移 `to - cell` 必须在 `pattern`（行走

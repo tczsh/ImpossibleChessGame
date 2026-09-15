@@ -152,9 +152,6 @@ func _remove_at(cell: Vector2i, name: String = "骨牌") -> void:
 	if piece == null:
 		print("(%d,%d) 处没有棋子" % [cell.x, cell.y])
 		return
-	if not piece.draggable:
-		print("(%d,%d) 处是阻挡棋子，不能删除" % [cell.x, cell.y])
-		return
 	board.call_main_thread("remove", [cell])
 	update_domino_count(name, +1)
 	print("已删除 (%d,%d) 的棋子，剩余 %d 张" % [cell.x, cell.y, int(domino_counts[name])])

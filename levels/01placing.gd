@@ -1,4 +1,4 @@
-class_name Level_01placing
+class_name Level_01
 extends Level
 ## 关卡 (0,1)
 ##
@@ -38,6 +38,7 @@ func referee() -> void:
 					KEY_Y:
 						_place_at(m.mouse_cell)
 					KEY_U:
-						_remove_at(m.mouse_cell)
+						if board.get_type(m.mouse_cell)==ChessPiece.PieceType.DOMINO:
+							_remove_at(m.mouse_cell)
 			Move.Action.MOVE:
 				_judge_and_apply(m)

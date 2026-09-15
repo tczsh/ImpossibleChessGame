@@ -36,8 +36,8 @@ const NAME_COLOR := Color(1.0, 1.0, 1.0, 1.0)
 ## `false` = locked. Rows index the board top to bottom, columns left to right.
 ## Edit this to set the initial lock state.
 const LEVEL_UNLOCKED := [
-	[true,  false, false, false, false, false],
-	[false, true, false, false, false, false],
+	[true,  true, true, true, true, true],
+	[true, true, false, false, false, false],
 	[false, false, true, false, false, false],
 	[false, false, false, true, false, false],
 	[false, false, false, false, true, false],
@@ -68,9 +68,7 @@ func _notification(what: int) -> void:
 func _load_levels() -> void:
 	Level.board = _board
 	# 每个关卡脚本都在自己的 .gd 里声明了 `class_name Level_XX`，等于在 Godot 的全局
-	# 类表中"注册自己"。这里直接读取全局类表里所有 `extends Level` 的类，而不是用
-	# DirAccess 扫描 res://levels —— 单文件导出（内嵌 PCK）下 DirAccess 无法枚举
-	# res:// 目录，而全局类表会随导出一起打包，因此这样在编辑器与导出包中都能工作。
+	# 类表中"注册自己"。关卡类只实例化一次，在_init中不要进行关卡局面的初始化，只可以用来定义常量
 	for info in ProjectSettings.get_global_class_list():
 		if info["base"] != "Level":
 			continue

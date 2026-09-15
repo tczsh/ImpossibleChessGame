@@ -1,4 +1,4 @@
-class_name Level_33color
+class_name Level_33
 extends Level
 ## 关卡 (3,3) 皇后染色
 ##

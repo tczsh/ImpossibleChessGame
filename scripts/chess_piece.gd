@@ -15,7 +15,7 @@ extends Area3D
 ## color, so game code needs no per-piece scene wiring.
 
 ## Kinds of pieces that can occupy a square. NONE is the empty-square value.
-enum PieceType { NONE, KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN }
+enum PieceType { NONE, KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN,DOMINO }
 
 ## Which player owns the piece (or, for dominoes, a decorative tint).
 enum PieceColor { WHITE, BLACK, RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, CYAN, PINK }

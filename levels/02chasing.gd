@@ -1,4 +1,4 @@
-class_name Level_02chasing
+class_name Level_02
 extends Level
 ## 关卡 (0,2)
 
@@ -23,11 +23,12 @@ func referee() -> void:
 		var m := waitmove()
 		if m.action == Move.Action.EXIT:
 			break
-		if ChessUtils.is_valid_move(m.from,m.to,ChessUtils.ORTHOGONAL):
-			board.call_main_thread("apply_move", [m])
-			var t:=ChessUtils.random_move_piece(white, ChessUtils.ORTHOGONAL)
-			print(t)
-			board.call_main_thread("move", [Move.new(white.pos(),t, Move.Action.MOVE)])
-			continue
-		else:board.call_main_thread("reject_move", [m])
+		if m.action==Move.Action.MOVE:
+			if ChessUtils.is_valid_move(m.from,m.to,ChessUtils.ORTHOGONAL):
+				board.call_main_thread("apply_move", [m])
+				var t:=ChessUtils.random_move_piece(white, ChessUtils.ORTHOGONAL)
+				print(t)
+				board.call_main_thread("move", [Move.new(white.pos(),t, Move.Action.MOVE)])
+				continue
+			else:board.call_main_thread("reject_move", [m])
 		

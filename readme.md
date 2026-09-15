@@ -45,13 +45,6 @@ This is a Godot-based 3D chessboard game project. It allows dynamic addition of 
 
 ---
 
-### Technical Highlights
-- Engine: Godot
-- Language: GDScript (primary)
-- Threading model: separate worker thread for game logic
-- Data abstraction: `Move` struct for unified user input
-
----
 
 *For detailed interfaces, please refer to the source code comments.*
 
@@ -97,11 +90,6 @@ This is a Godot-based 3D chessboard game project. It allows dynamic addition of 
 
 ---
 
-### 隐藏内容
-- 项目中隐藏了一个**调试模式**
-- 包含**两个测试游戏**作为彩蛋，供探索发现
-
----
 
 ### 技术要点
 - 引擎：Godot

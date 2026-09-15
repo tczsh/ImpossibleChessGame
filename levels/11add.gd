@@ -1,4 +1,4 @@
-class_name Level_11add
+class_name Level_11
 extends Level
 ## 关卡 (1,1)
 
